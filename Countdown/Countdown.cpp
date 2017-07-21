@@ -8,10 +8,9 @@
 using namespace std;
 
 
-void solve(int input[], char operatorsarray[])
+bool solve(int input[], char operatorsarray[])
 {
-	//std::cout << input[4];
-	//std::cout << operatorsarray[0] << " " << operatorsarray[1] << operatorsarray[2] << operatorsarray[3] << operatorsarray[4];
+	bool solved = false;
 	int total = input[0];
 	for (int i = 0; i < 5; i++)
 	{
@@ -27,32 +26,34 @@ void solve(int input[], char operatorsarray[])
 			total = total * input[i + 1];
 			break;
 		case '/':
-			if ((input[i + 1]) == 0) 
+			if ((input[i + 1]) == 0)
 			{
 			}
-			else 
+			else
 			{
 				total = total / input[i + 1];
 			}
 			break;
 		default:
 			break;
-		} 
+		}
 	}
-	
+
 	int solutions = 0;
 
 	if (total == input[6])
 	{
 		cout << "\n\nFound a correct combination! " << std::to_string(input[0]) << " " << operatorsarray[0] << " " << std::to_string(input[1]) << " " << operatorsarray[1] << " " << std::to_string(input[2]) << " " << operatorsarray[2] << " " << std::to_string(input[3]) << " " << operatorsarray[3] << " " << std::to_string(input[4]) << " " << operatorsarray[4] << " " << std::to_string(input[5]) << /* " " << operatorsarray[5] */ " = " << std::to_string(input[6]);
-		//cout << "test";
-		solutions = 1;
+		solutions = solutions + 1;
+		solved = true;
 	}
 
-	if (solutions != 0) 
+	if (solutions != 0)
 	{
 		cout << "\n\nNumber of solutions found:" << solutions;
 	}
+
+	return solved;
 }
 
 int main(int argc, int argv[6])
@@ -60,13 +61,15 @@ int main(int argc, int argv[6])
 	int input[7];
 	std::cout << "Please enter 6 numbers and a target number.\n\n";
 	std::cin >> argv[0] >> argv[1] >> argv[2] >> argv[3] >> argv[4] >> argv[5] >> argv[6];
-	for (int i=0;i<7;i++)
+	for (int i = 0; i < 7; i++)
 	{
 		input[i] = argv[i];
 	}
 	char operators[4] = { '+', '-', 'x', '/' };
 	char operatorsarray[5];
+    bool solved = false;
 	std::cout << "\n\nAttempting to solve...\n\n";
+
 	for (int b = 0; b < 4; b++)
 	{
 		for (int a = 0; a < 4; a++)
@@ -77,22 +80,29 @@ int main(int argc, int argv[6])
 				{
 					for (int x = 0; x < 4; x++)
 					{
-						operatorsarray[1] = operators[x];
-						solve(input, operatorsarray);
+						operatorsarray[0] = operators[x];
+						solved = solve(input, operatorsarray);
 					}
-					operatorsarray[2] = operators[y];
-					solve(input, operatorsarray);
+					operatorsarray[1] = operators[y];
+					solved = solve(input, operatorsarray);
 				}
-				operatorsarray[3] = operators[z];
-				solve(input, operatorsarray);
+				operatorsarray[2] = operators[z];
+				solved = solve(input, operatorsarray);
 			}
-			operatorsarray[4] = operators[a];
-			solve(input, operatorsarray);
+			operatorsarray[3] = operators[a];
+			solved = solve(input, operatorsarray);
 		}
-		operatorsarray[5] = operators[b];
-		solve(input, operatorsarray);
+		operatorsarray[4] = operators[b];
+		solved = solve(input, operatorsarray);
 	}
-	
-    
+
+	if (solved == true) {
+		cout << "\n\nI win!";
+	}
+	else
+	{
+		cout << "\n\nI cannot find a solution! You win...";
+	}
+
 	return 0;
 }
