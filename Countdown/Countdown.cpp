@@ -9,17 +9,9 @@
 using namespace std;
 
 
-bool solve(int input[], char operatorsarray[])
+void solve(int input[], char operatorsarray[])
 {
-	bool solved = false;
 	int total = input[0];
-
-	/*for (int i = 0; i < 7; i++)
-	{
-		cout << input[i] << "\n\n";
-	}
-	*/
-	
 
 	for (int i = 0; i < 5; i++)
 	{
@@ -52,18 +44,9 @@ bool solve(int input[], char operatorsarray[])
 
 	if (total == input[6])
 	{
-
 		cout << "\n\nFound a correct combination! " << std::to_string(input[0]) << " " << operatorsarray[0] << " " << std::to_string(input[1]) << " " << operatorsarray[1] << " " << std::to_string(input[2]) << " " << operatorsarray[2] << " " << std::to_string(input[3]) << " " << operatorsarray[3] << " " << std::to_string(input[4]) << " " << operatorsarray[4] << " " << std::to_string(input[5]) << /* " " << operatorsarray[5] */ " = " << std::to_string(input[6]);
 		solutions = solutions + 1;
-		solved = true;
 	}
-
-	if (solutions != 0)
-	{
-		cout << "\n\nNumber of solutions found:" << solutions;
-	}
-
-	return solved;
 }
 
 void operatorsarraygenerator(int input[])
@@ -96,7 +79,6 @@ void operatorsarraygenerator(int input[])
 		operatorsarray[4] = operators[b];
 		solve(input, operatorsarray);
 	}
-
 }
 
 void swap(int temparray[], int i, int j)
@@ -118,10 +100,7 @@ void permute(int temparray[], int size, int from = 0)
 {
 	if (from == size) 
 	{
-
 		operatorsarraygenerator(temparray);
-
-		//return print_array(temparray, size);
 	}
 	for (int i = from; i < size; ++i)
 	{
@@ -134,27 +113,18 @@ void permute(int temparray[], int size, int from = 0)
 int main(int argc, int argv[6])
 {
 	int input[7];
+	int temparray[7] = { input[0], input[1], input[2], input[3], input[4], input[5], input[6] };
+	bool solved = false;
+
 	std::cout << "Please enter 6 numbers and a target number.\n\n";
 	std::cin >> argv[0] >> argv[1] >> argv[2] >> argv[3] >> argv[4] >> argv[5] >> argv[6];
 	for (int i = 0; i < 7; i++)
 	{
 		input[i] = argv[i];
 	}
-
-	bool solved = false;
 	std::cout << "\n\nAttempting to solve...\n\n";
 
-	int temparray[6] = { input[0], input[1], input[2], input[3], input[4], input[5]};
-
-	permute(temparray, sizeof(temparray) / sizeof(temparray[0]));
-
-	if (solved == true) {
-		cout << "\n\nI win!";
-	}
-	else
-	{
-		cout << "\n\nI cannot find a solution! You win...";
-	}
+	permute(temparray, (sizeof(temparray) / sizeof(temparray[0])) - 1);
 
 	return 0;
 }
