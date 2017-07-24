@@ -98,14 +98,14 @@ void print_array(const int temparray[], int size)
 
 void permute(int temparray[], int size, int from = 0)
 {
-	if (from == size) 
+	if (from == size)
 	{
 		operatorsarraygenerator(temparray);
 	}
 	for (int i = from; i < size; ++i)
 	{
 		swap(temparray, from, i);
-		permute(temparray, size, from+1);
+		permute(temparray, size, from + 1);
 		swap(temparray, from, i);
 	}
 }
@@ -113,7 +113,6 @@ void permute(int temparray[], int size, int from = 0)
 int main(int argc, int argv[6])
 {
 	int input[7];
-	int temparray[7] = { input[0], input[1], input[2], input[3], input[4], input[5], input[6] };
 	bool solved = false;
 
 	std::cout << "Please enter 6 numbers and a target number.\n\n";
@@ -122,8 +121,9 @@ int main(int argc, int argv[6])
 	{
 		input[i] = argv[i];
 	}
-	std::cout << "\n\nAttempting to solve...\n\n";
 
+	int temparray[7] = { input[0], input[1], input[2], input[3], input[4], input[5], input[6] };
+	std::cout << "\n\nAttempting to solve...\n\n";
 	permute(temparray, (sizeof(temparray) / sizeof(temparray[0])) - 1);
 
 	return 0;
