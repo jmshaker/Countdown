@@ -88,14 +88,6 @@ void swap(int temparray[], int i, int j)
 	temparray[j] = temp;
 }
 
-void print_array(const int temparray[], int size)
-{
-	static int count = 0;
-	std::cout << std::setw(3) << ++count << ". ";
-	for (int i = 0; i < size; ++i) std::cout << temparray[i] << ' ';
-	std::cout << '\n';
-}
-
 void permute(int temparray[], int size, int from = 0)
 {
 	if (from == size)
@@ -112,17 +104,10 @@ void permute(int temparray[], int size, int from = 0)
 
 int main(int argc, int argv[6])
 {
-	int input[7];
-	bool solved = false;
-
 	std::cout << "Please enter 6 numbers and a target number.\n\n";
 	std::cin >> argv[0] >> argv[1] >> argv[2] >> argv[3] >> argv[4] >> argv[5] >> argv[6];
-	for (int i = 0; i < 7; i++)
-	{
-		input[i] = argv[i];
-	}
 
-	int temparray[7] = { input[0], input[1], input[2], input[3], input[4], input[5], input[6] };
+	int temparray[7] = { argv[0], argv[1], argv[2], argv[3], argv[4], argv[5], argv[6] };
 	std::cout << "\n\nAttempting to solve...\n\n";
 	permute(temparray, (sizeof(temparray) / sizeof(temparray[0])) - 1);
 
